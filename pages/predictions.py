@@ -182,7 +182,7 @@ column2 = dbc.Col(
 def on_button_click(n, f1_name, f1_value, f2_name, f2_value, f3_name, f3_value):
     if n is not None and  n  >= 1:
         
-        return "Predicted Car Price = $" + (predict(f1_name, f1_value, f2_name, f2_value, f3_name, f3_value))
+        return "Predicted Car Price =  $" + (predict(f1_name, f1_value, f2_name, f2_value, f3_name, f3_value))
 
 layout = dbc.Row([column1, column2])
 
