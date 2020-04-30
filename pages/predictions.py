@@ -6,9 +6,9 @@ import dash_html_components as html
 from dash.dependencies import Input, Output
 import pandas as pd
 import numpy as np
-# from sklearn.model_selection import train_test_split
-# from sklearn.linear_model import LinearRegression
-# from sklearn.impute import SimpleImputer
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.impute import SimpleImputer
 
 
 df = pd.read_csv("http://archive.ics.uci.edu/ml/machine-learning-databases/autos/imports-85.data")
@@ -61,7 +61,7 @@ dcc.Dropdown(
 
 
 f1_drop = dcc.Dropdown(
-        id='feature1-dropdown',
+        id='f1_name',
         options=drop_options,
         placeholder="Select first Feature",
         style={'color': 'black'}
@@ -75,25 +75,27 @@ f1_value = dcc.Input(
     value=''
 )
 f2_drop = dcc.Dropdown(
-        id='feature2-dropdown',
+        id='f2_name',
         options=drop_options,
         placeholder="Select second Feature",
         style={'color': 'black'}
     )
 
 f2_value = dcc.Input(
+    id='f2_value',
     placeholder='Feature 2 Value',
     type='text',
     value=''
 )
 f3_drop = dcc.Dropdown(
-        id='feature3-dropdown',
+        id='f3_name',
         options=drop_options,
         placeholder="Select third Feature",
         style={'color': 'black'}
     )
 
 f3_value = dcc.Input(
+    id='f3_value',
     placeholder='Feature 3 Value',
     type='text',
     value=''
@@ -173,10 +175,62 @@ column2 = dbc.Col(
 )
 
 @app.callback(
-    Output("output-text", "children"), [Input("predict-button", "n_clicks"), Input("f1_value", "value")]
+    Output("output-text", "children"), 
+    [Input("predict-button", "n_clicks"), Input("f1_name", "value"),Input("f1_value", "value"),Input("f2_name", "value"),
+    Input("f2_value", "value"), Input("f3_name", "value"), Input("f3_value", "value"), ]
 )
-def on_button_click(n, feature1):
-    if n is not None:
-        return "Predicted Value = " + feature1
+def on_button_click(n, f1_name, f1_value, f2_name, f2_value, f3_name, f3_value):
+    if n is not None and  n  >= 1:
+        return predict(f1_name, f1_value, f2_name, f2_value, f3_name, f3_value)
 
 layout = dbc.Row([column1, column2])
+
+
+def predict(f1_name, f1_value, f2_name, f2_value, f3_name, f3_value):
+
+    target = 'price'
+    features = []
+    values = []
+    if f1_name is not None and f1_value is not None and len(f1_value) > 0:
+        features.append(f1_name)
+        values.append(int(f1_value))
+
+    if f2_name is not None and f2_value is not None and len(f2_value) > 0:
+        features.append(f2_name)
+        values.append(int(f2_value))
+
+    if f3_name is not None and f3_value is not None and len(f3_value) > 0:
+        features.append(f3_name)
+        values.append(int(f3_value))
+
+    train, test = train_test_split(df, test_size=0.2)
+    train, validate = train_test_split(train, test_size=0.2)
+
+    # #getting the baseline
+    y_train = train[target]
+    y_validate = validate[target]
+    baseline = y_train.value_counts()
+
+    x_train = train[features]
+    x_val   = validate[features]
+    x_test  = test[features]
+
+    y_train = train[target]
+    y_val   = validate[target]
+
+    linear_reg = LinearRegression()
+
+    imputer = SimpleImputer()
+    x_train_imputed = imputer.fit_transform(x_train)
+    x_val_imputed = imputer.fit_transform(x_val)
+
+    linear_reg.fit(x_train_imputed, y_train)
+    linear_reg.predict(x_train_imputed)
+
+    test_case = []
+    test_case.append(values)
+    predicted_value = linear_reg.predict(test_case)
+
+
+    return predicted_value
+
