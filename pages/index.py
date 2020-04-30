@@ -30,14 +30,31 @@ column1 = dbc.Col(
 
 
 import pandas as pd
+import numpy as np
+
 df = pd.read_csv("http://archive.ics.uci.edu/ml/machine-learning-databases/autos/imports-85.data")
 
 col_names= ['symboling', 'normalized-losses','make', 'fuel-type', 'aspiration',  'num-of-doors',
             'body-style', 'drive-wheels', 'engine-location', 'wheel-base', 'length', 'width', 'height',
             'curb-weight','engine-type','num-of-cylinders','engine-size','fuel-system','bore','stroke','compression-ratio','horsepower','peak-rpm','citympg','highwaympg','price']
 df.columns = col_names
+df.loc[df['price'] == '?'] = np.nan
+df["price"] = df.price.astype(float)
+df['price'].fillna(df['price'].mean(), inplace = True)
+
 target = 'price'
 fig = px.histogram(df[target], x="price",   labels={'price':'Price of the Car', 'y':'Total Count'})
+fig.update_layout(
+    title="Car Model Prices",
+    xaxis_title="Car Prices (USD)",
+    yaxis_title="Model Count",
+    font=dict(
+        family="Courier New, monospace",
+        size=18,
+        color="#7f7f7f"
+    )
+)
+
 
 
 
