@@ -16,10 +16,10 @@ column1 = dbc.Col(
         dcc.Markdown(
             """
         
-            ## Esimate Mileage of Cars based on other factors
+            ## Esimate Price of Cars based on other factors
 
-            Based on the existing data, you can predict whether a car's mileage is going to be 
-            Not Good, Average, Good or Very Good. 
+            Based on the existing data, you can predict the price of a car based on features like horsepower 
+            etc.   
 
             """
         ),
@@ -28,9 +28,23 @@ column1 = dbc.Col(
     md=4,
 )
 
-gapminder = px.data.gapminder()
-fig = px.scatter(gapminder.query("year==2007"), x="gdpPercap", y="lifeExp", size="pop", color="continent",
-           hover_name="country", log_x=True, size_max=60)
+
+import pandas as pd
+df = pd.read_csv("http://archive.ics.uci.edu/ml/machine-learning-databases/autos/imports-85.data")
+
+col_names= ['symboling', 'normalized-losses','make', 'fuel-type', 'aspiration',  'num-of-doors',
+            'body-style', 'drive-wheels', 'engine-location', 'wheel-base', 'length', 'width', 'height',
+            'curb-weight','engine-type','num-of-cylinders','engine-size','fuel-system','bore','stroke','compression-ratio','horsepower','peak-rpm','citympg','highwaympg','price']
+df.columns = col_names
+target = 'price'
+fig = px.histogram(df[target], x="price",   labels={'price':'Price of the Car', 'y':'Total Count'})
+
+
+
+
+# gapminder = px.data.gapminder()
+# fig = px.scatter(gapminder.query("year==2007"), x="gdpPercap", y="lifeExp", size="pop", color="continent",
+#            hover_name="country", log_x=True, size_max=60)
 
 column2 = dbc.Col(
     [
