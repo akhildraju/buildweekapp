@@ -181,7 +181,8 @@ column2 = dbc.Col(
 )
 def on_button_click(n, f1_name, f1_value, f2_name, f2_value, f3_name, f3_value):
     if n is not None and  n  >= 1:
-        return predict(f1_name, f1_value, f2_name, f2_value, f3_name, f3_value)
+        
+        return "Predicted Car Price = $" + (predict(f1_name, f1_value, f2_name, f2_value, f3_name, f3_value))
 
 layout = dbc.Row([column1, column2])
 
@@ -232,5 +233,7 @@ def predict(f1_name, f1_value, f2_name, f2_value, f3_name, f3_value):
     predicted_value = linear_reg.predict(test_case)
 
 
-    return predicted_value
+    formatted_value = '%.2f' %  predicted_value[0]
+    return formatted_value
+
 
