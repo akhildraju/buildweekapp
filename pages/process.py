@@ -135,7 +135,7 @@ column1 = dbc.Col(
 
         dcc.Markdown(
             """
-            I wanted to see what features impact the price. Because of the shapley graph, number of cylinders  was heavily impacting the price outcome. 
+            Because of the shapley graph, number of cylinders  was heavily impacting the price outcome. 
             I wanted to take a better look at this correlation so I made a Seaborn plot comparing the number of cylinders to price as well as two other features (“horsepower”,”curb-weight”).  
   
             """
@@ -150,12 +150,43 @@ column1 = dbc.Col(
 
         dcc.Markdown(
             """
-            For me the hardest part about this project was just deciding between classification or regression when it came down to this dataset. 
-            I found that in the end regression seemed to do better with the dataset as well as the target I selected (“price”). 
-            Looking back I could have used a bigger dataset that could have given us a more accurate prediction. 
+            The dataset I selected had a lot of missing data or the data had been replaced with a “?”. After writing the code above I went through and cleaned the dataset. First I wanted to get my baseline metrics such as MAE since we had to use a regression model. MAE or Mean Absolute Error basically takes the difference between the actual value and the predicted value for that instance.  
   
             """
-        )
+        ),
+      
+        html.Img(src=app.get_asset_url('code1.png'), style={'height':'111px', 'width':'486px',  'display': 'flex', 
+        'textAlign': 'center', 'align-items': 'center', 'justify-content': 'center'}),
+
+
+        html.Pre("""
+        """),
+
+        dcc.Markdown(
+            """
+            After using the code above on not only the train error, but the test and validation errors as well, I got that absolute mean errors for my train and test datasets (regression model) had shown to be $3180 and $3366. I also tested for the r^2 scores using the following code:
+ 
+            """
+        ),
+      
+        html.Img(src=app.get_asset_url('code2.png'), style={'height':'97px', 'width':'455px',  'display': 'flex', 
+        'textAlign': 'center', 'align-items': 'center', 'justify-content': 'center'}),
+
+
+        html.Pre("""
+        """),
+
+        dcc.Markdown(
+            """
+            R-squared is a statistical measure of how close the data are to the fitted regression line. And since this is a regression model it should perfectly showcase what we should expect the behavior of our train and test datasets to be. The r^2 scores I got for my train and test dataset were 0.6803897444390236 for train, and 0.3775318021597549 for my test. 
+
+            """
+        ),
+      
+        html.Pre("""
+        """),
+
+
 
     ],
 )
