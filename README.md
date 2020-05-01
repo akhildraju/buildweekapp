@@ -1,3 +1,3 @@
 # Dash Template
 
-[Instructions](https://lambdaschool.github.io/ds/unit2/dash-template/)
+This app can be launched  at https://adr-mileage-predictor.herokuapp.com/
