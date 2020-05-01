@@ -75,6 +75,8 @@ from app import app
 
 column1 = dbc.Col(
     [
+        html.H1(children="Process" ),
+
         dcc.Markdown(
             """
             I guess you could say I am a big car guy. Ever since I was growing up I always had a great fascination with cars. So when asked to do a data science project, I thought why not do it about a topic I really like?' 
@@ -143,7 +145,13 @@ column1 = dbc.Col(
 
         dcc.Markdown(
             """
-            R-squared is a statistical measure of how close the data are to the fitted regression line. And since this is a regression model it should perfectly showcase what we should expect the behavior of our train and test datasets to be. The r^2 scores I got for my train and test dataset were 0.6803897444390236 for train, and 0.3775318021597549 for my test. 
+            R-squared is a statistical measure of how close the data are to the fitted regression line. And since this is a regression model it should perfectly showcase what we should expect the behavior of our train and test datasets to be. The r^2 scores I got for my train and test dataset were 0.6803897444390236 for train, and 0.3775318021597549 for my test.
+
+            R-squared is always between 0 and 100%:  
+            - 0% indicates that the model explains none of the variability of the response data around its mean.
+            - 100% indicates that the model explains all the variability of the response data around its mean.
+            
+            In general, the higher the R-squared, the better the model fits your data. 
 
             """
         ),
