@@ -122,6 +122,19 @@ column1 = dbc.Col(
 
         dcc.Markdown(
             """
+            I wanted to see what features impact the price. I have created Permutaion Feature Importance to see the rekationship between the selected features and my target column car price. I have used n_repeats=10 to randomly shuffle.      
+  
+            """
+        ),
+      
+        html.Img(src=app.get_asset_url('permimp.png'), style={'height':'576px', 'width':'958px',  'display': 'flex', 
+        'textAlign': 'center', 'align-items': 'center', 'justify-content': 'center'}),
+
+        html.Pre("""
+        """),
+
+        dcc.Markdown(
+            """
             I wanted to see what features impact the price. Because of the shapley graph, number of cylinders  was heavily impacting the price outcome. 
             I wanted to take a better look at this correlation so I made a Seaborn plot comparing the number of cylinders to price as well as two other features (“horsepower”,”curb-weight”).  
   
@@ -130,6 +143,7 @@ column1 = dbc.Col(
       
         html.Img(src=app.get_asset_url('multichart.png'), style={'height':'578px', 'width':'700px',  'display': 'flex', 
         'textAlign': 'center', 'align-items': 'center', 'justify-content': 'center'}),
+
 
         html.Pre("""
         """),
