@@ -18,14 +18,14 @@ column1 = dbc.Col(
         dcc.Markdown(
             """
         
-            ## Esimate Price of Cars based on other features
+            ## Predict the Price of Cars based on other features
 
             Based on the existing data, you can predict the price of a car based on features like horsepower 
             etc.   
 
             """
         ),
-        dcc.Link(dbc.Button('Estimate', color='primary'), href='/predictions')
+        dcc.Link(dbc.Button('Predict', color='primary'), href='/predictions')
     ],
     md=4,
 )
