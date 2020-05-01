@@ -58,9 +58,6 @@ fig.update_layout(
 )
 
 
-image_filename = 'main1.png' # replace with your own image
-encoded_image = base64.b64encode(open(image_filename, 'rb').read())
-
 
 # gapminder = px.data.gapminder()
 # fig = px.scatter(gapminder.query("year==2007"), x="gdpPercap", y="lifeExp", size="pop", color="continent",
