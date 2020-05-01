@@ -5,6 +5,8 @@ import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 import plotly.express as px
+import base64
+
 
 # Imports from this application
 from app import app
@@ -16,7 +18,7 @@ column1 = dbc.Col(
         dcc.Markdown(
             """
         
-            ## Esimate Price of Cars based on other factors
+            ## Esimate Price of Cars based on other features
 
             Based on the existing data, you can predict the price of a car based on features like horsepower 
             etc.   
@@ -56,16 +58,23 @@ fig.update_layout(
 )
 
 
-
+image_filename = 'main1.png' # replace with your own image
+encoded_image = base64.b64encode(open(image_filename, 'rb').read())
 
 
 # gapminder = px.data.gapminder()
 # fig = px.scatter(gapminder.query("year==2007"), x="gdpPercap", y="lifeExp", size="pop", color="continent",
 #            hover_name="country", log_x=True, size_max=60)
 
+# column2 = dbc.Col(
+#     [
+#         dcc.Graph(figure=fig),
+#     ]
+# )
+
 column2 = dbc.Col(
     [
-        dcc.Graph(figure=fig),
+        html.Img(src=app.get_asset_url('main.png'), style={'height':'100%', 'width':'50%'})
     ]
 )
 
