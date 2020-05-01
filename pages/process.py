@@ -199,6 +199,7 @@ column1 = dbc.Col(
         html.Pre("""
         """),
 
+        html.H1(children="Example Prediction" ),
 
         dcc.Markdown(
             """
