@@ -174,7 +174,7 @@ column1 = dbc.Col(
 
         dcc.Markdown(
             """
-            I wanted to see what features impact the price. I have created Permutaion Feature Importance to see the rekationship between the selected features and my target column car price. I have used n_repeats=10 to randomly shuffle.      
+            I wanted to see what features impact the price. I have created Permutaion Feature Importance to see the relationship between the selected features and my target column car price. I have used n_repeats=10 to randomly shuffle.      
   
             """
         ),
@@ -189,7 +189,6 @@ column1 = dbc.Col(
             """
             Because of the shapley graph, number of cylinders  was heavily impacting the price outcome. 
             I wanted to take a better look at this correlation so I made a Seaborn plot comparing the number of cylinders to price as well as two other features (“horsepower”,”curb-weight”).  
-  
             """
         ),
       
@@ -201,6 +200,40 @@ column1 = dbc.Col(
         """),
 
 
+        dcc.Markdown(
+            """
+            Where the model succeeds/fails depends on the features. If given incorrect values it will give you an estimate that seems like an outlier when it comes to similar vehicles in that price range as well. If we take for example the 2020 q60 red sport 400 RWD (rear wheel drive), we can get a quick price estimate from google:
+
+            """
+        ),
+      
+        html.Img(src=app.get_asset_url('samplecar.png'), style={'height':'647px', 'width':'454px',  'display': 'flex', 
+        'textAlign': 'center', 'align-items': 'center', 'justify-content': 'center'}),
+
+
+        html.Pre("""
+        """),
+
+        dcc.Markdown(
+            """
+            When using the predictor and implementing some its features we get:
+
+            """
+        ),
+      
+        html.Img(src=app.get_asset_url('predct.png'), style={'height':'578px', 'width':'700px',  'display': 'flex', 
+        'textAlign': 'center', 'align-items': 'center', 'justify-content': 'center'}),
+
+
+        html.Pre("""
+        """),
+
+        dcc.Markdown(
+            """
+            Now of course, the code does not account for the twin turbocharged engine, the pricey leather and alcantara interior , nor the safety features this car comes with but it does estimate it within a very appropriate price range.   
+
+            """
+        ),
 
 
     ],
